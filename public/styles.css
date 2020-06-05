@@ -1,0 +1,43 @@
+
+.facebook {
+    width: 200px;
+    height: 30px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+
+    background-color: royalblue;
+}
+
+.default {
+    width: 200px;
+    height: 30px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+
+    background-color: white;
+}
+
+.google {
+    width: 200px;
+    height: 30px;
+    background-color: indianred;
+}
+
+.social {
+    margin: 50px;
+}
+
+.welcome {
+    padding: 50px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.logout {
+    display: none;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+}
