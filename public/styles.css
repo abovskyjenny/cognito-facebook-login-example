@@ -24,7 +24,7 @@
 }
 
 .social {
-    margin: 50px;
+    margin: 0 50px;
 }
 
 .welcome {
@@ -40,4 +40,8 @@
 .buttons {
     display: flex;
     flex-direction: column;
+}
+
+.link {
+    margin: 100px;
 }
