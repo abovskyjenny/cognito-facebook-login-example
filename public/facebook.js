@@ -1,7 +1,7 @@
 var user = {};
 var loginResponse = {};
-var APP_ID = 'YOUR_FACEBOOK_APP_ID';
-var AWSRegion = 'YOUR_AWS_REGION';
+var APP_ID = '264492931528812';
+var AWSRegion = 'us-east-1';
 var IdentityPoolId = 'YOUR_POOL_IDENTITY';
 
 

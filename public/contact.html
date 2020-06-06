@@ -1,0 +1,72 @@
+<html>
+<head>
+<script>
+function submitToAPI(e) {
+       e.preventDefault();
+//       var URL = "API Gateway";
+
+
+       var name = document.getElementById("name-input").value;
+       var phone = document.getElementById("phone-input").value;
+       var email = document.getElementById("email-input").value;
+       var desc = document.getElementById("description-input").value;
+	   if (name=="" || phone=="" || email=="" || desc=="")
+        {
+            alert("Please Fill All Required Field");
+            return false;
+        }
+		
+		if(!name) {
+			alert("Name entered, is not valid");
+				return false;
+		}
+		
+		emailRE = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+		if(!emailRE.test(email)) {
+			alert("Email Address entered, is not valid");
+				return false;
+		}
+       var data = {
+          name : name,
+          phone : phone,
+          email : email,
+          desc : desc
+        };
+
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.open("POST", "YOUR GATE API");
+		xmlhttp.setRequestHeader("Content-Type", "application/json");
+		xmlhttp.send(JSON.stringify(data));
+		xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState === 4) {
+			var response = JSON.parse(xmlhttp.responseText);
+			if (xmlhttp.status === 200 ) {
+				console.log('successful');
+				document.getElementById("contact-form").innerHTML = "<h1>Thank you for your message/feedback<br>our team will get back to you soon!</h1>";
+		    } else {
+			    console.log('failed');
+			}
+		}
+	}
+	
+	document.getElementById('contact-form').reset();
+	  
+	} 
+</script>
+</head>
+<body>
+<form id="contact-form" method="post">
+      <h4>Name:</h4>
+      <input type="text" style="height:35px;" id="name-input" placeholder="Enter name here" class="form-control" style="width:100%;" /><br/>
+      <h4>Phone:</h4>
+      <input type="phone" style="height:35px;" id="phone-input" placeholder="Enter phone number" class="form-control" style="width:100%;"/><br/>
+      <h4>Email:</h4>
+      <input type="email" style="height:35px;" id="email-input" placeholder="Enter email here..." class="form-control" style="width:100%;"/><br/>
+      <h4>How can we help you?</h4>
+      <textarea id="description-input" rows="3" placeholder="Enter your message..." class="form-control" style="width:100%;"></textarea><br/>
+      <div class="g-recaptcha" data-sitekey="6Lc7cVMUAAAAAM1yxf64wrmO8gvi8A1oQ_ead1ys" class="form-control" style="width:100%;"></div>
+      <button type="button" onClick="submitToAPI(event)" class="btn btn-lg" style="margin-top:20px;">Submit</button>
+</form>
+
+</body>
+</html>
