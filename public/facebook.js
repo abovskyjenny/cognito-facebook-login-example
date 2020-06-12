@@ -1,8 +1,8 @@
 var user = {};
 var loginResponse = {};
-var APP_ID = '647851979299048';
-var AWSRegion = 'us-east-1';
-var IdentityPoolId = 'us-east-1:87458b11-7054-4ef3-83c9-4b2fe328fd9b';
+var APP_ID = 'YOUR_FACEBOOK_APP_ID';
+var AWSRegion = 'YOUR_AWS_REGION';
+var IdentityPoolId = 'YOUR_POOL_IDENTITY';
 
 
 var facebookAPI = {
