@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script>
+
+    function getUrlVars() {
+        var vars = {};
+        window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function iterate(m, key, value) {
+            vars[key] = value;
+        });
+        return vars;
+    }
+
+    function checkCognitoCallback() {
+        if(!window.opener) {
+            return;
+        }
+        var params = getUrlVars();
+        var code = params.code;
+        var errorDescription = decodeURIComponent(params.error_description);
+        var error = decodeURIComponent(params.error);
+
+        if (code) {
+            code = code.split('#')[0];
+            var state = getStateParameters(params);
+            window.opener.postMessage(
+                { status: 'finished', data: { code, newsletters: state.newsletters, signInLocation: state.signInLocation } },
+                '*'
+            );
+            window.close();
+        } else if(errorDescription) {
+            console.log('errorDescription ', errorDescription);
+            window.opener.postMessage(
+                { status: 'error', message: errorDescription },
+                '*'
+            );
+            window.close();
+
+        } else if(error) {
+            console.log('error ', error);
+            window.opener.postMessage(
+                { status: 'error', message: error },
+                '*'
+            );
+            window.close();
+        }
+    }
+
+    function getStateParameters(params) {
+        var state = params.state;
+        var result = {};
+        if (state) {
+            state = state.split('#')[0];
+            var decoded = decodeURIComponent(state);
+            result = JSON.parse(decoded);
+        }
+        return result;
+    }
+
+
+    window.onload = function () {
+        checkCognitoCallback();
+    }
+
+</script>
+<body>
+<div> Thank you for connecting</div>
+</body>
+</html>

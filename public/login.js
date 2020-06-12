@@ -1,13 +1,13 @@
 var user = {};
 var tokens;
 
-var COGNITO_CLIENT_ID = 'YOUR_APP_CLIENT_ID';
-var COGNITO_DOMAIN = 'YOUR_COGNITO_DOMAIN';
+var COGNITO_CLIENT_ID = '58k8ptc6lot749m4ujh0g3av27';
+var COGNITO_DOMAIN = 'https://top10-users.auth.us-east-1.amazoncognito.com';
 
 
 const tokenUrl = `${COGNITO_DOMAIN}/oauth2/token`;
 const infoUrl = `${COGNITO_DOMAIN}/oauth2/userInfo`;
-const redirectUrl = encodeURIComponent('http://localhost:3000/');//'http%3A%2F%2Flocalhost%3A3000';
+const redirectUrl = encodeURIComponent('http://localhost:3000');//'http%3A%2F%2Flocalhost%3A3000';
 
 
 window.onload = async function load() {
@@ -29,11 +29,12 @@ async function initUserWelcomeMessage() {
     var codeParam = params['code'];
     if(codeParam) {
         console.log('codeParam ', codeParam);
-        await login(codeParam);
+        await login(codeParam)
+        window.history.pushState(undefined, undefined, window.location.origin);
         var accessToken = window.localStorage.getItem('accessToken');
         if(accessToken) {
             user = await getInfo(accessToken);
-            if(user) {
+            if(user && user.given_name) {
                 var hello = document.getElementById('hello');
                 var message = 'Welcome '
                 if(user.name) {
