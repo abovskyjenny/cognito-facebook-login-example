@@ -5,7 +5,18 @@
     margin-right: 50px;
     margin-bottom: 50px;
 
-    background-color: royalblue;
+    background-color: #385499;
+    color: white;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    outline: none;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 1.15384615;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .default {
@@ -15,16 +26,31 @@
     margin-bottom: 50px;
 
     background-color: white;
+    color: white;
 }
 
 .google {
     width: 200px;
     height: 30px;
     background-color: indianred;
+    color: white;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    outline: none;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 1.15384615;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .social {
-    margin: 0 50px;
+    margin: 100px 50px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .welcome {
@@ -44,4 +70,10 @@
 
 .link {
     margin: 100px;
+}
+
+@media only screen and (min-width: 600px) {
+    .buttons {
+        flex-direction: row;
+    }
 }

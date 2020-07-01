@@ -2,74 +2,42 @@ var user = {};
 var tokens;
 
 var COGNITO_CLIENT_ID = '58k8ptc6lot749m4ujh0g3av27';
-var COGNITO_DOMAIN = 'https://top10-users.auth.us-east-1.amazoncognito.com';
+var COGNITO_DOMAIN = 'https://login.ni-xsite.com';
+var CALLBACK_URL = 'http://localhost:3000/callback';
 
 
 const tokenUrl = `${COGNITO_DOMAIN}/oauth2/token`;
 const infoUrl = `${COGNITO_DOMAIN}/oauth2/userInfo`;
-const redirectUrl = encodeURIComponent('http://localhost:3000');//'http%3A%2F%2Flocalhost%3A3000';
-
-
-window.onload = async function load() {
-    await initUserWelcomeMessage();
-}
-
-function getUrlVars() {
-    var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-        vars[key] = value;
-    });
-    return vars;
-}
-
-
-async function initUserWelcomeMessage() {
-    var params = getUrlVars();
-
-    var codeParam = params['code'];
-    if(codeParam) {
-        console.log('codeParam ', codeParam);
-        await login(codeParam)
-        window.history.pushState(undefined, undefined, window.location.origin);
-        var accessToken = window.localStorage.getItem('accessToken');
-        if(accessToken) {
-            user = await getInfo(accessToken);
-            if(user && user.given_name) {
-                var hello = document.getElementById('hello');
-                var message = 'Welcome '
-                if(user.name) {
-                    message += user.name;
-                } else {
-                    message += user.given_name + (user.family_name ? ` ${user.family_name}` : '') + ' !';
-                }
-                hello.innerText = message;
-            }
-        }
-    }
-}
-
+const redirectUrl = encodeURIComponent(CALLBACK_URL);
+const STAGE = { newsletters: true };
+const stateParam = encodeURIComponent(JSON.stringify(STAGE));
 
 function getProviderUrl(providerName, redirectUri) {
     var redirect = redirectUri || redirectUrl;
     var scope = 'aws.cognito.signin.user.admin%20email%20openid%20phone%20profile';
     var url;
     if(providerName) {
-        url = `${COGNITO_DOMAIN}/oauth2/authorize?identity_provider=${providerName}&redirect_uri=${redirect}&response_type=code&client_id=${COGNITO_CLIENT_ID}&scope=${scope}&state=%7B%20newsletters%3A%201%7D`;
+        url = `${COGNITO_DOMAIN}/oauth2/authorize?identity_provider=${providerName}&redirect_uri=${redirect}&response_type=code&client_id=${COGNITO_CLIENT_ID}&scope=${scope}&state=${stateParam}`;
     } else {
-        url = `${COGNITO_DOMAIN}/oauth2/authorize?redirect_uri=${redirect}&response_type=code&client_id=${COGNITO_CLIENT_ID}&scope=${scope}&state=%7B%20newsletters%3A%201%7D`;
+        url = `${COGNITO_DOMAIN}/oauth2/authorize?redirect_uri=${redirect}&response_type=code&client_id=${COGNITO_CLIENT_ID}&scope=${scope}&state=${stateParam}`;
     }
     return url;
 }
 
 function facebookLogin() {
-    window.location.href = getProviderUrl('Facebook');
+    loginProvider(getProviderUrl('Facebook'));
+}
+
+function loginProvider(url) {
+    openWindow(url, 'socialLogin', window, 600, 500);
 }
 
 function googleLogin() {
-    window.location.href = getProviderUrl('Google');
+    loginProvider(getProviderUrl('Google'));
 }
+
 function defaultLogin() {
-    window.location.href = getProviderUrl();
+    loginProvider(getProviderUrl());
 }
 
 const refreshTokens = async refreshToken => {

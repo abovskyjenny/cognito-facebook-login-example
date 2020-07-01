@@ -6,9 +6,15 @@
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="./styles.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="./messaging.js"></script>
 	<script src="./login.js"></script>
 </head>
 <body>
+<script>
+	window.onload = function () {
+		initWindowMessaging();
+	}
+</script>
 
 <div class="social">
 
@@ -17,21 +23,9 @@
 	</div>
 
 	<div id="buttons" class="buttons">
-		<button onclick="defaultLogin()" class="default">Login</button>
-
+<!--		<button onclick="defaultLogin()" class="default">Login</button>-->
 		<button onclick="facebookLogin()" class="facebook">Facebook login</button>
 		<button onclick="googleLogin()" class="google">Google login</button>
-
-		<button onclick="logout()" class="logout">Logout</button>
-
-	</div>
-
-	<div class="link">
-		<a href="facebook.html" target="_blank" >Facebook API login</a>
-	</div>
-
-	<div class="link">
-		<a href="contact.html" target="_blank" >Contact us with Lambda</a>
 	</div>
 </div>
 

@@ -1,24 +1,20 @@
 {
-  "name": "ls",
+  "name": "cognito-facebook-login-example",
   "version": "1.0.0",
-  "description": "Example javascript application that uses AWS Cognito to: * add a new user to the pool * sign the user in * sign the user out * change password * reset forgotten password * delete the user",
   "main": "index.js",
   "directories": {
     "test": "public"
   },
   "scripts": {
-    "test": "echo \\\"Error: no public specified\\\" && exit 1"
+    "test": "echo \\\"Error: no public specified\\\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RomanKosobrodov/aws-cognito-js-example.git"
+    "url": ""
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/RomanKosobrodov/aws-cognito-js-example/issues"
-  },
-  "homepage": "https://github.com/RomanKosobrodov/aws-cognito-js-example#readme",
   "dependencies": {
     "amazon-cognito-identity-js": "^4.3.0",
     "aws-sdk": "^2.692.0",
