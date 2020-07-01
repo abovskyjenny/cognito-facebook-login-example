@@ -9,4 +9,4 @@ https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-soc
 
 #Run
 1. npm install
-2. node index.js
+2. npm start

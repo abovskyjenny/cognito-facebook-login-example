@@ -26,8 +26,24 @@ function showError() {
     //TODO
 }
 
-function sendSocialLoginRequest() {
-    //TODO
+async function sendSocialLoginRequest(code, state) {
+    //TODO put your function
+
+    // simple hello
+    var token = await login(code);
+    if(token  && token.accessToken) {
+        var user = await getInfo(token.accessToken);
+        if(user && user.given_name) {
+            var hello = document.getElementById('hello');
+            var message = 'Welcome '
+            if(user.name) {
+                message += user.name + '!';
+            } else {
+                message += user.given_name + (user.family_name ? ` ${user.family_name}` : '') + ' !';
+            }
+            hello.innerText = message;
+        }
+    }
 }
 
 function checkCognitoCallback() {

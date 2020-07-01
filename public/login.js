@@ -1,6 +1,3 @@
-var user = {};
-var tokens;
-
 var COGNITO_CLIENT_ID = '58k8ptc6lot749m4ujh0g3av27';
 var COGNITO_DOMAIN = 'https://login.ni-xsite.com';
 var CALLBACK_URL = 'http://localhost:3000/callback';
@@ -51,10 +48,7 @@ const refreshTokens = async refreshToken => {
         throw Error();
     }
     const { access_token, id_token } = await response.json();
-    window.localStorage.setItem('accessToken', access_token);
-    window.localStorage.setItem('idToken', id_token);
-    window.localStorage.setItem('refreshToken', refreshToken);
-    tokens = {
+    return {
         accessToken: access_token,
         idToken: id_token,
         refreshToken,
@@ -73,10 +67,7 @@ const login = async code => {
         throw Error();
     }
     const { access_token, id_token, refresh_token } = await response.json();
-    window.localStorage.setItem('accessToken', access_token);
-    window.localStorage.setItem('idToken', id_token);
-    window.localStorage.setItem('refreshToken', refresh_token);
-    tokens = {
+    return {
         accessToken: access_token,
         idToken: id_token,
         refreshToken: refresh_token,
@@ -94,7 +85,6 @@ const getInfo = async access_token => {
     if (!response.ok) {
         throw Error();
     }
-    user = await response.json();
-    window.localStorage.setItem('user', user);
+    var user = await response.json();
     return user;
 };
