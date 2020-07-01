@@ -28,6 +28,7 @@ function showError() {
 
 async function sendSocialLoginRequest(code, state) {
     //TODO put your function
+    // send request to backend API: /social-login
 
     // simple hello
     var token = await login(code);
