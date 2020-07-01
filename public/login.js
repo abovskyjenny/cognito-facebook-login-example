@@ -1,5 +1,5 @@
-var COGNITO_CLIENT_ID = '58k8ptc6lot749m4ujh0g3av27';
-var COGNITO_DOMAIN = 'https://login.ni-xsite.com';
+var COGNITO_CLIENT_ID = 'COGNITO_CLIENT_ID';
+var COGNITO_DOMAIN = 'COGNITO_DOMAIN';
 var CALLBACK_URL = 'http://localhost:3000/callback';
 
 
